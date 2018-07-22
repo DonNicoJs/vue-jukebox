@@ -1,0 +1,29 @@
+{
+  "name": "Magic-Pouch",
+  "version": "1.0.0",
+  "description": "",
+  "config": {
+    "ver": "1.0.0"
+  },
+  "scripts": {
+    "build": "cd app/ && quasar build",
+    "build_ios": "cd app/ && quasar build ios",
+    "get_cordova_version": "echo '\\033[0;31m' $(xmllint --xpath 'string(//*[local-name()=\"widget\"]/@version)' app/cordova/config.xml)",
+    "set_cordova_version": "cd app/cordova/ && cordova-update-config --appversion",
+    "release_cordova": "cd app/cordova/ && cordova build android --release --buildConfig build.json --info",
+    "copy_android_apks": "cp app/cordova/platforms/android/build/outputs/apk/*-release.apk android_apk/",
+    "release": "yarn build && yarn release_cordova && yarn copy_android_apks",
+    "test_release": "yarn release && adb uninstall info.blazenet.magicpouch && adb install android_apk/android-armv7-release.apk",
+    "test_device": "yarn build && cd app/cordova/ && cordova run android"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lordfuoco/magic-pouch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lordfuoco/magic-pouch/issues"
+  },
+  "homepage": "https://github.com/lordfuoco/magic-pouch#readme"
+}
