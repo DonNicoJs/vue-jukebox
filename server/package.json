@@ -12,7 +12,8 @@
     "inert": "^5.1.0"
   },
   "scripts": {
-    "dev": "gulp"
+    "dev": "gulp",
+    "start": "node index.js"
   },
   "devDependencies": {
     "eslint": "^3.15.0",
