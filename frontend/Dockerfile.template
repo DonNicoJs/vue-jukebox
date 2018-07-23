@@ -3,8 +3,13 @@ FROM resin/%%RESIN_MACHINE_NAME%%-node:9-slim
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+
+ADD package.json yarn.lock /tmp/
+RUN cd /tmp && yarn
+RUN cd /usr/src/app && ln -s /tmp/node_modules
+
 COPY . /usr/src/app/
 RUN yarn build
 
-# start command
+
 CMD [ "yarn", "start" ]
