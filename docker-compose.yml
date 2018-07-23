@@ -4,15 +4,13 @@ services:
     build: ./frontend
     expose:
       - "80"
-  nginx:
-    restart: always
-    build: ./nginx
+  proxy:
+    build: ./haproxy
+    depends_on:
+      - nuxt
+      - server
     ports:
       - "80:80"
-      - "443:443"
-    links:
-      - server
-      - nuxt
 
   server:
     build: ./server

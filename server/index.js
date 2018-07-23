@@ -9,7 +9,9 @@ const songs = [];
 let currentSongIndex = 0;
 
 fs.readdirSync(defaultPlaylist).forEach(file => {
-  songs.push(file);
+  if (file !== '.gitignore') {
+    songs.push(file);
+  }
 })
 
 // create the server
