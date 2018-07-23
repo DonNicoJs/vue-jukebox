@@ -17,7 +17,8 @@ fs.readdirSync(defaultPlaylist).forEach(file => {
 // create the server
 const server = new Hapi.Server(
   {
-    host: '127.0.0.1', port: 9010,
+    host: '0.0.0.0',
+    port: 9010,
     routes: {
       cors: false,
       files: {

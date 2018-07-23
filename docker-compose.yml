@@ -3,7 +3,8 @@ services:
   nuxt:
     build: ./frontend
     expose:
-      - "80"
+      - "3000"
+
   proxy:
     build: ./haproxy
     depends_on:
