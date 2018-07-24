@@ -1,4 +1,6 @@
 version: '2'
+volumes:
+    songs:
 services:
   nuxt:
     build: ./frontend
@@ -17,3 +19,19 @@ services:
     build: ./server
     expose:
       - "9010"
+    volumes:
+      - 'songs:/usr/src/app/songs'
+
+  samba:
+    image: dperson/samba
+    environment:
+      TZ: 'EST5EDT'
+    read_only: true
+    tmpfs:
+      - /tmp
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - /songs:/mnt:z
+    command: '-s "Mount;/mnt"'
