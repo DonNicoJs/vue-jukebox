@@ -1,5 +1,5 @@
 FROM resin/rpi-alpine
-RUN ["cross-build-start"]
+
 RUN apk --no-cache --no-progress upgrade && \
     apk --no-cache --no-progress add bash samba shadow tini && \
     adduser -D -G users -H -S -g 'Samba User' -h /tmp smbuser && \
@@ -35,7 +35,6 @@ RUN apk --no-cache --no-progress upgrade && \
     echo '   min protocol = SMB2' >>$file && \
     echo '' >>$file && \
     rm -rf /tmp/*
-RUN ["cross-build-end"]
 
 COPY samba.sh /usr/bin/
 
