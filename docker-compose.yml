@@ -33,5 +33,5 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - /songs:/mnt:z
+      - 'songs:/mnt'
     command: '-s "Mount;/mnt"'
