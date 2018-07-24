@@ -23,7 +23,7 @@ services:
       - 'songs:/usr/src/app/songs'
 
   samba:
-    image: dperson/samba
+    build: ./samba
     environment:
       TZ: 'EST5EDT'
     read_only: true
