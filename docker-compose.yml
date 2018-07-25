@@ -34,4 +34,4 @@ services:
     tty: true
     volumes:
       - 'songs:/mnt'
-    command: '-s "Mount;/mnt"'
+    command: '-s "Mount;/mnt" -u "music:song" -n'
