@@ -3,7 +3,7 @@ const HAPIWebSocket = require('hapi-plugin-websocket');
 const inert = require('inert');
 const fs = require('fs-extra');
 const p = require('path');
-const defaultPlaylist = './public/playlists/default/'
+const defaultPlaylist = './songs/default/'
 
 const songs = [];
 let currentSongIndex = 0;
