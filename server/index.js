@@ -22,7 +22,7 @@ const server = new Hapi.Server(
     routes: {
       cors: false,
       files: {
-          relativeTo: p.join(__dirname, 'public')
+          relativeTo: p.join(__dirname, 'songs')
       }
   }
 });
@@ -101,7 +101,7 @@ const init = async () => {
     path: '/songs/{param*}',
     handler: {
         directory: {
-            path: 'playlists/default/',
+            path: 'default/',
             listing: true
         }
     }
