@@ -2,7 +2,7 @@ FROM resin/rpi-debian
 
 RUN apt-get update && apt-get install -y samba
 COPY *.txt /
-RUN cat password.txt password.txt | smbpasswd -sa root && \
+RUN echo 'password' | tee - | smbpasswd -sa root && \
   # Make directory to share
   mkdir /data && \
   # Adjust Samba configuration
