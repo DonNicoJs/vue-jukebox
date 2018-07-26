@@ -24,14 +24,6 @@ services:
 
   samba:
     build: ./samba
-    environment:
-      TZ: 'EST5EDT'
-    read_only: true
-    tmpfs:
-      - /tmp
     restart: unless-stopped
-    stdin_open: true
-    tty: true
     volumes:
-      - 'songs:/mnt'
-    command: '-s "Mount;/mnt" -u "music;song" -n'
+      - 'songs:/data'
