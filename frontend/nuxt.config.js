@@ -54,6 +54,7 @@ const config = {
 
 if (process.env.NODE_ENV === 'production') {
   config.axios = {
+    browserBaseURL: '/'
   };
   config.proxy = {
   };
