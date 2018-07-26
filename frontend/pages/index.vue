@@ -9,6 +9,7 @@
       :src="currentSong"
       controls
       autoplay
+      @ended="playNext"
     />
   </v-layout>
 </template>
@@ -48,6 +49,9 @@ export default {
   methods: {
     registerToServer () {
       this.$socket.sendObj();
+    },
+    playNext () {
+      this.$axios.post('/api/playlist/next');
     }
   }
 };

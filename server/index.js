@@ -55,13 +55,6 @@ const init = async () => {
     }
   });
 
-  function deleteFiles(files) {
-    files.forEach(name => {
-      const path = p.join(__dirname, '/uploads/', name);
-      fs.unlink(path);
-    });
-  }
-
   server.route({
     method: 'POST',
     path: '/jukebox',
