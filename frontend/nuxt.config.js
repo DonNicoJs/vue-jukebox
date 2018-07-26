@@ -35,7 +35,7 @@ const config = {
     { src: '~/plugins/ws', ssr: false }
   ],
   build: {
-    vendor: ['axios', 'vuetify'],
+    vendor: ['babel-polyfill', 'axios', 'vuetify'],
     extend (config, ctx) {
       if (ctx.isClient) {
         config.node = {
