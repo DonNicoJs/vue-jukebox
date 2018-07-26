@@ -6,3 +6,5 @@ read only = no
 browseable = yes
 public = yes
 writeable = yes
+printing = bsd
+printcap name = /dev/null

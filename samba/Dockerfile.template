@@ -12,7 +12,5 @@ RUN echo 'password' | tee - | smbpasswd -sa root && \
   # Clean up
   rm *.txt
 
-# Expose Samba ports
-EXPOSE 137 138 139 445
 # Run Samba in the foreground
 CMD ["/usr/sbin/smbd", "-FS"]
