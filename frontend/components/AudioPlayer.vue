@@ -102,7 +102,10 @@ export default {
         this.play();
       }
     },
-    play () {
+    async play () {
+      if (this.localContext.state === 'suspended') {
+        await this.localContext.resume();
+      }
       if (this.buffer) {
         this.source = this.localContext.createBufferSource();
         this.source.buffer = this.buffer;
