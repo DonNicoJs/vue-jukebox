@@ -5,7 +5,7 @@ const fs = require('fs-extra');
 const p = require('path');
 const defaultPlaylist = './songs/default/'
 
-const songs = [];
+let songs = [];
 let currentSongIndex = 0;
 
 fs.readdirSync(defaultPlaylist).forEach(file => {
@@ -41,15 +41,45 @@ const init = async () => {
     path: '/api/playlist/{action}',
     config: {
       handler: ({params}) => {
-        currentSongIndex = params.action === 'next' ? currentSongIndex + 1 : currentSongIndex - 1;
-        currentSongIndex = currentSongIndex <  0 ? songs.length - 1 : currentSongIndex;
-        currentSongIndex = currentSongIndex >  songs.length - 1 ? 0 : currentSongIndex;
+        if (isNaN(params.action)) {
+          currentSongIndex = params.action === 'next' ? currentSongIndex + 1 : currentSongIndex - 1;
+          currentSongIndex = currentSongIndex <  0 ? songs.length - 1 : currentSongIndex;
+          currentSongIndex = currentSongIndex >  songs.length - 1 ? 0 : currentSongIndex;
+        } else {
+          currentSongIndex = params.action
+        }
         const next = songs[currentSongIndex];
         players.forEach(ctx => {
           if (ctx && ctx.ws) {
             ctx.ws.send(JSON.stringify({mutation: 'SET_CURRENT_SONG', namespace: 'ws', data: next}));
           }
         });
+        return '';
+      }
+    }
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/api/playlist/',
+    config: {
+      handler: () => {
+        return songs.map((song, id) => ({song, id}));
+      }
+    }
+  });
+
+  server.route({
+    method: 'POST',
+    path: '/api/refresh',
+    config: {
+      handler: () => {
+        songs = [];
+        fs.readdirSync(defaultPlaylist).forEach(file => {
+          if (file !== '.gitignore') {
+            songs.push(file);
+          }
+        })
         return '';
       }
     }
