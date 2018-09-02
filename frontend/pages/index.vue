@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import AudioPlayer from '../components/AudioPlayer';
 import PlayList from '../components/PlayList';
 
@@ -46,9 +46,6 @@ export default {
     PlayList
   },
   layout: 'main',
-  async fetch ({store: {dispatch}}) {
-    await dispatch('ws/loadPlaylist');
-  },
   data () {
     return {};
   },
@@ -72,7 +69,13 @@ export default {
       }
     }
   },
+  mounted () {
+    this.loadPlaylist();
+  },
   methods: {
+    ...mapActions({
+      loadPlaylist: 'ws/loadPlaylist'
+    }),
     registerToServer () {
       this.$socket.sendObj();
     },
